@@ -39,8 +39,9 @@ function Sidebar({ cvInfo, onCvChange, createSection }) {
       <div>
         <h1 className="text-lg font-semibold">Secciones:</h1>
         {cvInfo.sections.map((section) => (
-          <p key={section.title}>{section.title}</p> 
+          <p key={section.title}>{section.title}</p>
           // Here it should also show the added details on each section with buttons to make it editable.
+          // Maybe just make them input
         ))}
       </div>
 
