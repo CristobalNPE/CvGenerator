@@ -1,4 +1,4 @@
-function Sidebar({ cvInfo, onCvChange }) {
+function Sidebar({ cvInfo, onCvChange, createSection }) {
   return (
     <nav className="bg-slate-300 flex flex-col w-1/4 drop-shadow-xl gap-5 items-center">
       <h1>Sidebar</h1>
@@ -35,6 +35,21 @@ function Sidebar({ cvInfo, onCvChange }) {
         value={cvInfo.linkedIn}
         onChange={onCvChange}
       />
+
+      <div>
+        <h1 className="text-lg font-semibold">Secciones:</h1>
+        {cvInfo.sections.map((section) => (
+          <p key={section.title}>{section.title}</p> 
+          // Here it should also show the added details on each section with buttons to make it editable.
+        ))}
+      </div>
+
+      <button
+        onClick={() => createSection("Cute Section")}
+        className="p-3 bg-red-400"
+      >
+        TEST add new section
+      </button>
     </nav>
   );
 }
