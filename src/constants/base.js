@@ -1,8 +1,10 @@
 const base = {
-  name: "",
-  email: "",
-  phoneNumber: "",
-  linkedIn: "",
+  basicInfo: {
+    name: "",
+    email: "",
+    phoneNumber: "",
+    linkedIn: "",
+  },
   sections: [
     {
       title: "Datos académicos",

@@ -1,40 +1,48 @@
+import { Input } from "@nextui-org/react";
+import { Accordion, AccordionItem } from "@nextui-org/react";
+import { RiUser3Fill } from "react-icons/ri";
+import { Button, Tooltip } from "@nextui-org/react";
+
 function Sidebar({ cvInfo, onCvChange, createSection }) {
   return (
-    <nav className="bg-slate-300 flex flex-col w-1/4 drop-shadow-xl gap-5 items-center">
-      <h1>Sidebar</h1>
-      {/* <SideButton icon={<RiUser3Fill />} text="información general" />
-      <SideButton icon={<RiBook2Fill />} text="DATOS ACADéMICOS" />
-      <SideButton icon={<RiBriefcase2Fill />} text="EXPERIENCIA LABORAL" />
-      <SideButton icon={<RiHammerFill />} text="HABILIDADES TéCNICAS" /> */}
+    <nav className=" flex flex-col bg-slate-400 max-w-[25rem] min-w-[20rem] w-1/4 drop-shadow-xl p-4 gap-5 items-center rounded-r-2xl h-full min-h-screen ">
+      <h1 className="text-2xl my-4 font-black tracking-wide ">CVGenerator</h1>
 
-      <input
-        name="name"
-        type="text"
-        placeholder="Nombre Completo"
-        value={cvInfo.name}
-        onChange={onCvChange}
-      />
-      <input
-        name="email"
-        type="email"
-        placeholder="Correo Electrónico"
-        value={cvInfo.email}
-        onChange={onCvChange}
-      />
-      <input
-        name="phoneNumber"
-        type="text"
-        placeholder="Número Contacto"
-        value={cvInfo.phoneNumber}
-        onChange={onCvChange}
-      />
-      <input
-        name="linkedIn"
-        type="text"
-        placeholder="LinkedIn"
-        value={cvInfo.linkedIn}
-        onChange={onCvChange}
-      />
+      <Accordion>
+        <AccordionItem
+          key="1"
+          aria-label="Accordion 1"
+          title="Información Básica"
+          indicator={<RiUser3Fill className="text-slate-900 text-xl" />}
+        >
+          {Object.keys(cvInfo.basicInfo).map((info) => {
+            const property = cvInfo.basicInfo[info];
+            // console.log({ info, property });
+            return (
+              <Input
+                key={info}
+                type={info === "email" ? "email" : "text"}
+                radius="sm"
+                label={property.label}
+                name={info}
+                value={property.value}
+                onChange={onCvChange}
+                className="text-slate-700 mb-2"
+              />
+            );
+          })}
+        </AccordionItem>
+        <AccordionItem
+          key="2"
+          aria-label="Accordion 2"
+          title="Accordion 2"
+        ></AccordionItem>
+        <AccordionItem
+          key="3"
+          aria-label="Accordion 3"
+          title="Accordion 3"
+        ></AccordionItem>
+      </Accordion>
 
       <div>
         <h1 className="text-lg font-semibold">Secciones:</h1>
@@ -45,12 +53,17 @@ function Sidebar({ cvInfo, onCvChange, createSection }) {
         ))}
       </div>
 
-      <button
-        onClick={() => createSection("Cute Section")}
-        className="p-3 bg-red-400"
-      >
-        TEST add new section
-      </button>
+      <Tooltip content="Add a section for testing." closeDelay={100}>
+        <Button
+          size="md"
+          radius="md"
+          color="primary"
+          variant="ghost"
+          onClick={() => createSection("Cute Section")}
+        >
+          TEST add new section
+        </Button>
+      </Tooltip>
     </nav>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import userData from "../constants/userData";
-import base from "../constants/base";
+import base from "../constants/base2";
 import PreviewPage from "./PreviewPage";
 import Sidebar from "./Sidebar";
 function CvEditor() {
@@ -9,12 +9,13 @@ function CvEditor() {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setCurrentCv((prevCurrentCv) => {
-      return {
-        ...prevCurrentCv,
-        [name]: value,
-      };
-    });
+    setCurrentCv((prevCurrentCv) => ({
+      ...prevCurrentCv,
+      basicInfo: {
+        ...prevCurrentCv.basicInfo,
+        [name]: { ...prevCurrentCv.basicInfo[name], value: value },
+      },
+    }));
   };
 
   const createSection = (sectionTitle) => {
@@ -32,7 +33,7 @@ function CvEditor() {
   };
 
   return (
-    <main className="bg-slate-600 min-h-screen flex">
+    <main className="bg-slate-700 h-full min-h-screen flex">
       <Sidebar
         cvInfo={currentCv}
         onCvChange={handleChange}
