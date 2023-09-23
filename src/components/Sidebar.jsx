@@ -10,12 +10,6 @@ function Sidebar({
   pushToSection,
   onDeleteClick,
 }) {
-  // Create an algorithm for linkedin input, where it makes it appear in format linkedin.com/in/cristobalnpe/,
-  //in this case user should only type 'cristobalnpe' and the rest should  appear by itself in the preview page.
-
-  //Maybe uppercase the first letter of name/lastnames too
-  //Look for how to include
-
   const sectionAccordionElements = cvInfo.sections.map((section) => (
     <AccordionItem
       key={section.title}

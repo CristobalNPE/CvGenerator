@@ -76,20 +76,6 @@ function CvEditor() {
     }));
   };
 
-  // const createSection = (sectionTitle) => {
-  //   const newSection = {
-  //     title: sectionTitle,
-  //     details: [],
-  //   };
-
-  //   setCurrentCv((prevCurrentCv) => {
-  //     return {
-  //       ...prevCurrentCv,
-  //       sections: [...prevCurrentCv.sections, newSection],
-  //     };
-  //   });
-  // };
-
   return (
     <main className="bg-gradient-to-r from-slate-600 to-slate-800 h-full min-h-screen flex">
       <Sidebar
