@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 function CvEditor() {
   const [currentCv, setCurrentCv] = useState(base);
 
-  const deleteHandleClick = (id, fromSection) => {
+  const handleDetailsDelete = (id, fromSection) => {
     setCurrentCv((prevCurrentCv) => ({
       ...prevCurrentCv,
       sections: prevCurrentCv.sections.map((section) => {
@@ -22,7 +22,7 @@ function CvEditor() {
     }));
   };
 
-  const pushToSection = (sectionName) => {
+  const handlePushDetailsToSection = (sectionName) => {
     setCurrentCv((prevCurrentCv) => ({
       ...prevCurrentCv,
       sections: prevCurrentCv.sections.map((section) => {
@@ -40,7 +40,7 @@ function CvEditor() {
     }));
   };
 
-  const handleChange = (event) => {
+  const handleBasicInfoChange = (event) => {
     const { name, value } = event.target;
     setCurrentCv((prevCurrentCv) => ({
       ...prevCurrentCv,
@@ -48,6 +48,31 @@ function CvEditor() {
         ...prevCurrentCv.basicInfo,
         [name]: { ...prevCurrentCv.basicInfo[name], value: value },
       },
+    }));
+  };
+
+  const handleSectionDetailsChange = (event, sectionName, currentDetailId) => {
+    const { name, value } = event.target;
+
+    setCurrentCv((prevCurrentCv) => ({
+      ...prevCurrentCv,
+      sections: prevCurrentCv.sections.map((section) => {
+        if (section.title === sectionName) {
+          return {
+            ...section,
+            details: section.details.map((detail) => {
+              if (detail.id === currentDetailId) {
+                return {
+                  ...detail,
+                  [name]: value,
+                };
+              }
+              return detail;
+            }),
+          };
+        }
+        return section;
+      }),
     }));
   };
 
@@ -69,9 +94,10 @@ function CvEditor() {
     <main className="bg-gradient-to-r from-slate-600 to-slate-800 h-full min-h-screen flex">
       <Sidebar
         cvInfo={currentCv}
-        onCvChange={handleChange}
-        onDeleteClick={deleteHandleClick}
-        pushToSection={pushToSection}
+        onBasicInfoChange={handleBasicInfoChange}
+        onDeleteClick={handleDetailsDelete}
+        onSectionDetailsChange={handleSectionDetailsChange}
+        pushToSection={handlePushDetailsToSection}
       />
       <PreviewPage cvInfo={currentCv} />
     </main>

@@ -3,7 +3,13 @@ import { RiUser3Fill } from "react-icons/ri";
 import AddButton from "./AddButton";
 import DetailsCard from "./DetailsCard";
 
-function Sidebar({ cvInfo, onCvChange, pushToSection, onDeleteClick }) {
+function Sidebar({
+  cvInfo,
+  onBasicInfoChange,
+  onSectionDetailsChange,
+  pushToSection,
+  onDeleteClick,
+}) {
   // Create an algorithm for linkedin input, where it makes it appear in format linkedin.com/in/cristobalnpe/,
   //in this case user should only type 'cristobalnpe' and the rest should  appear by itself in the preview page.
 
@@ -26,7 +32,8 @@ function Sidebar({ cvInfo, onCvChange, pushToSection, onDeleteClick }) {
           fromSection={section.title}
           key={detail.id}
           {...detail}
-          deleteHandleClick={onDeleteClick}
+          handleDelete={onDeleteClick}
+          handleChange={onSectionDetailsChange}
         />
       ))}
       <div className="flex justify-end mt-3">
@@ -45,7 +52,7 @@ function Sidebar({ cvInfo, onCvChange, pushToSection, onDeleteClick }) {
         label={property.label}
         name={info}
         value={property.value}
-        onChange={onCvChange}
+        onChange={onBasicInfoChange}
         className="text-slate-700 mb-2"
       />
     );
