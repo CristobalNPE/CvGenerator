@@ -3,7 +3,7 @@ import CvInfo from "./CvInfo";
 
 function CvSection({ section }) {
   const sectionDetails = section.details.map((detail) => (
-    <CvInfo details={detail} key={detail.title}/>
+    <CvInfo {...detail} key={detail.id} />
   ));
 
   return (
